@@ -123,10 +123,9 @@ def trefoil(N=500, noise=0, tsampletype='even', tmin=0, tmax=2*pi,
 def flatTorus(N=1600, r1=1, r2=1):
     # Sample ~N points from a flat torus (in R^4) with radii r1 & r2
     # not uniform in case of r1 != r2
-    Ngrid = np.round(np.sqrt(N))
+    Ngrid = int(np.sqrt(N))
     grid  = np.linspace(0,2*np.pi,num=Ngrid)
-    t = np.array([(x,y) for x in grid for y in grid])
+    t = np.array([[x,y] for x in grid for y in grid])
     x = r1*np.cos(t[:,0]); y = r1*np.sin(t[:,0])
     z = r2*np.cos(t[:,1]); w = r2*np.sin(t[:,1]) 
-    return np.column_stack((x,y,z,w))
-    # Not tested        
+    return np.column_stack((x,y,z,w))    
