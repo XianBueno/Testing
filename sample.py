@@ -37,34 +37,11 @@ def circle(N=1000, minangle=0, maxangle=2*pi, r=1, cx=0, cy=0, get_t=True):
         return np.column_stack((t,x,y))
     else:
         return np.column_stack((x,y))
-    # Not tested
 
-'''
-#!!!! Fix this, produces same spiral each time
-def spiral(N=1000, w=1, ax=1, ay=1, minangle=0, maxangle=2*pi):
-    # Sample points from a spiral
-    # where minangle <= t <= maxangle
-    # where ax and ay are horizontal and veritcal stretch
-    # where w is the "wrapping number" or frequency (how many times it wraps)
-    # WARNING: This sample is probably not uniform
-    t = np.linspace(minangle,maxangle,num=N)
-    x = ax*t/(2*pi)*np.cos(w*t); y=ay*t/(2*pi)*np.sin(w*t)
-    return np.column_stack((x,y))
-    # Not tested
-'''
-
-"""
-def spiral2(N=1000, w=1, s=0, ax=1, ay=1, minangle=0, maxangle=2*pi):
-    # Sample points from a spiral
-    # Wraps around w many times for default angle range.
-    # Parameter s shifts the start point for innermost end
-    # Parameters ax and ay control vertical/horizontal stretch
-    # WARNING: This sample is not uniform
-    # WARNING: If ax or ay<0 may self-intersect
-    t  = np.linspace(minangle,maxangle,num=N)
-    x  = ax*(t+s)/(2*pi+s)*np.cos(w*t); y=ay*(t+s)/(2*pi+s)*np.sin(w*t)
-    return np.column_stack((x,y))
-"""
+def hopf_link(N=1000):
+    # ADD    
+    return 0
+    
 
 def spiral(N=1000, w=1, noise=0,s=0, ax=1, ay=1, minangle=0, maxangle=2*pi, byArclength=False):
     # Sample points from a spiral
@@ -145,10 +122,11 @@ def trefoil(N=500, noise=0, tsampletype='even', tmin=0, tmax=2*pi,
 
 def flatTorus(N=1600, r1=1, r2=1):
     # Sample ~N points from a flat torus (in R^4) with radii r1 & r2
+    # not uniform in case of r1 != r2
     Ngrid = np.round(np.sqrt(N))
     grid  = np.linspace(0,2*np.pi,num=Ngrid)
     t = np.array([(x,y) for x in grid for y in grid])
     x = r1*np.cos(t[:,0]); y = r1*np.sin(t[:,0])
     z = r2*np.cos(t[:,1]); w = r2*np.sin(t[:,1]) 
-    return np.column_stack((x,y))
+    return np.column_stack((x,y,z,w))
     # Not tested        
